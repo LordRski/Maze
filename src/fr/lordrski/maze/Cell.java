@@ -16,17 +16,60 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.util;
+package fr.lordrski.maze;
 
 /**
  * Représente une case de coordonnées (x,y), x et y étant des entiers.
  */
-public class Cell extends Coordinates {
+public class Cell extends Coordinates implements Cloneable {
 	
 	private int value;
+	
+	public Cell(int x, int y, int value) {
+		super(x, y);
+		this.value = value;
+	}
 
 	public Cell(int x, int y) {
 		super(x, y);
+	}
+	
+	/**
+	 * Additionne des cases avec un couple (x,y)
+	 * 
+	 * @param	x
+	 * 			la coordonnée x à ajouter
+	 * @param	y
+	 * 			la coordonnée y à ajouter
+	 * 
+	 * @return la case équivalente à la somme de la case courante et du couple (x,y)
+	 */
+	public Cell add(int x, int y) {
+		return new Cell(this.x + x, this.y + y);
+	}
+	
+	/**
+	 * Additionne deux cases entre-elles
+	 * 
+	 * @param	c
+	 * 			la case à ajouter
+	 * 
+	 * @return la case équivalente à la somme des deux cases
+	 */
+	public Cell add(Cell c) {
+		return new Cell(this.x + c.x, this.y + c.y);
+	}
+	
+	/**
+	 * Additionne une case et un point cardinal
+	 * 
+	 * @param	d
+	 * 			le point cardinal à ajouter
+	 * 
+	 * @return la case équivalente à la somme de la case et des coordonnées du point cardinal
+	 */
+	public Cell add(Direction d) {
+		return new Cell(this.x + d.getX(), this.y + d.getY());
 	}
 	
 	/**
@@ -62,12 +105,24 @@ public class Cell extends Coordinates {
 	
 	@Override
 	public boolean equals(Object o) {
-		return super.equals(o) && (o instanceof Cell && value == ((Cell)o).value);
+		if (o == this) {
+			return true;
+		}
+		if (o instanceof Cell) {
+			Cell other = (Cell) o;
+			return x == other.x && y == other.y && value == other.value;
+		}
+		return false;
 	}
 	
 	@Override
 	public String toString() {
-		return "Cell[x=" + x + ", y=" + y + "]";
+		return "Cell[x=" + x + ", y=" + y + ", value=" + value + "]";
+	}
+	
+	@Override
+	public Cell clone() {
+		return new Cell(x, y, value);
 	}
 
 }

@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.util;
+package fr.lordrski.maze;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,14 +53,23 @@ public enum Direction {
 	 * {@see fr.lordrski.maze.util.Coordinates#getX()}
 	 */
 	public int getX() {
-		return (int) coord.x;
+		return coord.x;
 	}
 	
 	/**
 	 * {@see fr.lordrski.maze.util.Coordinates#getY()}
 	 */
 	public int getY() {
-		return (int) coord.y;
+		return coord.y;
+	}
+	
+	/**
+	 * Retourne le point cardinal sous forme de coordonnées
+	 * 
+	 * @return le point cardinal sous forme de coordonnées
+	 */
+	public Coordinates toCoordinates() {
+		return coord;
 	}
 	
 	/**
@@ -74,7 +83,7 @@ public enum Direction {
 	 * @return un point cardinal sous forme de puissance de 2
 	 */
 	public int exponent() {
-		return this.ordinal() << 1;
+		return 1 << ordinal();
 	}
 	
 	@Override

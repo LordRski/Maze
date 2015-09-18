@@ -18,13 +18,19 @@
  */
 package fr.lordrski.maze.algorithm.builder;
 
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Queue;
+
+import fr.lordrski.maze.Cell;
+import fr.lordrski.maze.Direction;
 import fr.lordrski.maze.Maze;
-import fr.lordrski.maze.util.Cell;
 
 /**
  * Algorithme du Recursive Backtracker pour créer un labyrinthe.
  */
-public class RecursiveMazeBuilder implements MazeBuilder {
+public class RecursiveMazeBuilder extends MazeBuilder {
 
 	@Override
 	public Maze build(int width, int height, int xstart, int ystart) {
@@ -36,13 +42,67 @@ public class RecursiveMazeBuilder implements MazeBuilder {
 		}
 		
 		Maze maze = new Maze(width, height);
+		carve(maze, maze.get(xstart, ystart));
+
+		Cell entrance = maze.randomAccess();
+		Cell exit = defineExit(maze, entrance);
+		maze.setEntrance(entrance);
+		maze.setExit(exit);
 		
-		throw new UnsupportedOperationException();
+		return maze;
 	}
 
 	@Override
-	public void carve(Maze maze, Cell cell) {
+	public void carve(Maze m, Cell c) {
+		Direction[] directions = Direction.shuffles();
+		Cell n;
+		for (Direction d : directions) {
+			n = c.add(d);
+			if (m.canContain(n)) {
+				n = m.get(n);
+				if (n.val() == 0) {
+					c.val(c.val() | d.exponent());
+					n.val(n.val() | d.opposite().exponent());
+					carve(m, n);
+				}
+			}
+		}
+	}
+
+	@Override
+	public Cell defineExit(Maze maze, Cell entrance) {
+		Queue<Cell> queue = new ArrayDeque<Cell>();
+		Map<Cell, Integer> map = new HashMap<Cell, Integer>();
+		Cell exit = entrance.clone();
+		Cell[] cells = maze.getCells();
+		Cell c;
+		Cell n;
+		int val;
 		
+		for (Cell cell : cells) {
+			map.put(cell, 0);
+		}
+		
+		queue.offer(entrance);
+		
+		while (!queue.isEmpty()) {
+			c = queue.remove();
+			for (Direction d : Direction.values()) {
+				n = c.add(d);
+				if (!maze.hasWall(c, d) && maze.canContain(n)) {
+					n = maze.get(n);
+					if (map.get(n) == 0) {
+						val = map.get(c) + 1;
+						map.put(n, val);
+						if (val > map.get(exit)) {
+							exit = n;
+						}
+						queue.offer(n);
+					}
+				}
+			}		
+		}
+		return exit;
 	}
 
 }

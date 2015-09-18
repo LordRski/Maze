@@ -16,17 +16,17 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.util;
+package fr.lordrski.maze;
 
 /**
  * Représentation de coordonnées dans un repère 2D.
  */
-public class Coordinates {
+public class Coordinates implements Cloneable {
 	
-	protected final double x;
-	protected final double y;
+	protected final int x;
+	protected final int y;
 	
-	public Coordinates(double x, double y) {
+	public Coordinates(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -36,7 +36,7 @@ public class Coordinates {
 	 * 
 	 * @return la coordonnée x
 	 */
-	public double getX() {
+	public int getX() {
 		return this.x;
 	}
 	
@@ -45,7 +45,7 @@ public class Coordinates {
 	 * 
 	 * @return la coordonnée y
 	 */
-	public double getY() {
+	public int getY() {
 		return this.y;
 	}
 	
@@ -59,7 +59,7 @@ public class Coordinates {
 	 * 
 	 * @return les coordonnées équivalentes à la somme des coordonnées courantes et du couple (x,y)
 	 */
-	public Coordinates add(double x, double y) {
+	public Coordinates add(int x, int y) {
 		return new Coordinates(this.x + x, this.y + y);
 	}
 	
@@ -77,17 +77,30 @@ public class Coordinates {
 	
 	@Override
 	public boolean equals(Object o) {
-		return o == this || (o instanceof Coordinates && x == ((Coordinates)o).x && y == ((Coordinates)o).y);
+		if (o == this) {
+			return true;
+		}
+		if (o instanceof Coordinates) {
+			Coordinates other = (Coordinates) o;
+			return x == other.x && y == other.y;
+		}
+		return false;
 	}
 	
 	@Override
 	public int hashCode() {
-		return (((int)x) << 4 + ((int)y) << 2);
+		int tmp = y + ((x+1)/2);
+		return x + (tmp * tmp);
 	}
 	
 	@Override
 	public String toString() {
 		return "Coordinates[x=" + x + ", y=" + y + "]";
+	}
+	
+	@Override
+	public Coordinates clone() {
+		return new Coordinates(x, y);
 	}
 
 }

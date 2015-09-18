@@ -18,8 +18,8 @@
  */
 package fr.lordrski.maze.algorithm.finder;
 
+import fr.lordrski.maze.Cell;
 import fr.lordrski.maze.Maze;
-import fr.lordrski.maze.util.Cell;
 
 /**
  * Permet de trouver un chemin dans un labyrinthe.
