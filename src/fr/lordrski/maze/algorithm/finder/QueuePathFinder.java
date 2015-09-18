@@ -19,8 +19,6 @@
 package fr.lordrski.maze.algorithm.finder;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import fr.lordrski.maze.Cell;
@@ -42,7 +40,6 @@ public class QueuePathFinder implements PathFinder {
 			throw new IllegalArgumentException("Can not find path with illegal end point: " + end);
 		}
 		
-		List<Cell> visited = new LinkedList<Cell>();
 		Queue<Cell> q = new ArrayDeque<Cell>();
 		Cell c;
 		Cell n;
@@ -51,7 +48,6 @@ public class QueuePathFinder implements PathFinder {
 		
 		while (!q.isEmpty()) {
 			c = q.remove();
-			visited.add(c);
 			
 			if (c.equals(end)) {
 				return true;
@@ -61,8 +57,8 @@ public class QueuePathFinder implements PathFinder {
 				n = c.add(d);
 				if (maze.canContain(n)) {
 					n = maze.get(n);
-					if (!maze.hasWall(c, d) && !visited.contains(n)) {
-						visited.add(n);
+					if (!maze.hasWall(c, d) && !n.isVisited()) {
+						n.visit();
 						q.offer(n);
 					}
 				}

@@ -33,7 +33,7 @@ import fr.lordrski.maze.Maze;
 public class RecursiveMazeBuilder extends MazeBuilder {
 
 	@Override
-	public Maze build(int width, int height, int xstart, int ystart) {
+	protected Maze create(int width, int height, int xstart, int ystart) {
 		if (xstart < 0 || xstart >= width) {
 			throw new IndexOutOfBoundsException("Coordinate xstart not in maze");
 		}

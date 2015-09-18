@@ -54,7 +54,37 @@ public abstract class MazeBuilder {
 	 * 
 	 * @return un nouveau labyrinthe
 	 */
-	public abstract Maze build(int width, int height, int xstart, int ystart);
+	public Maze build(int width, int height, int xstart, int ystart) {
+		if (width < 0 || width > Integer.MAX_VALUE) {
+			throw new IllegalArgumentException("Can not build a maze with incorrect width=" + width);
+		}
+		if (height < 0 || height > Integer.MAX_VALUE) {
+			throw new IllegalArgumentException("Can not build a maze with incorrect height=" + height);
+		}
+		if (xstart < 0 || xstart >= width) {
+			throw new IndexOutOfBoundsException("Coordinate xstart=" + xstart + " not in maze");
+		}
+		if (ystart < 0 || ystart >= height) {
+			throw new IndexOutOfBoundsException("Coordinate ystart=" + ystart + " not in maze");
+		}
+		return create(width, height, xstart, ystart);
+	}
+	
+	/**
+	 * Construit un labyrinthe (interne au package)
+	 * 
+	 * @param	width
+	 * 			la longueur du labyrinthe
+	 * @param	height
+	 * 			la hauteur du labyrinthe
+	 * @param	xstart
+	 * 			la coordonnée x de départ pour la construction du labyrinthe (normalement: x >= 0 & x < width)
+	 * @param	ystart
+	 * 			la coordonnée y de départ pour la construction du labyrinthe (normalement: y >= 0 & y < height)
+	 * 
+	 * @return un nouveau labyrinthe
+	 */
+	protected abstract Maze create(int width, int height, int xstart, int ystart);
 	
 	/**
 	 * Ouvre un passage dans un labyrinthe à partir d'une case contenu dans celui-ci

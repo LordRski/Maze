@@ -119,6 +119,18 @@ public class Maze implements Cloneable {
 	}
 	
 	/**
+	 * Test si une case est l'entrée du labyrinthe
+	 * 
+	 * @param	cell
+	 * 			la case à tester
+	 * 
+	 * @return vrai si la case est l'entrée du labyrinthe
+	 */
+	public boolean isEntrance(Cell cell) {
+		return entrance.equals(cell);
+	}
+	
+	/**
 	 * Retourne la case d'arrivée du labyrinthe
 	 * 
 	 * @return la case d'arrivée du labyrinthe
@@ -138,6 +150,18 @@ public class Maze implements Cloneable {
 			throw new IllegalArgumentException("Exit " + exit + " not in maze");
 		}
 		this.exit = exit;
+	}
+	
+	/**
+	 * Test si une case est la sortie du labyrinthe
+	 * 
+	 * @param	cell
+	 * 			la case à tester
+	 * 
+	 * @return vrai si la case est la sortie du labyrinthe
+	 */
+	public boolean isExit(Cell cell) {
+		return exit.equals(cell);
 	}
 	
 	/**

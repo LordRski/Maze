@@ -18,10 +18,12 @@
  */
 package fr.lordrski.maze;
 
+import java.util.Observable;
+
 /**
  * Représentation de coordonnées dans un repère 2D.
  */
-public class Coordinates implements Cloneable {
+public class Coordinates extends Observable implements Cloneable {
 	
 	protected final int x;
 	protected final int y;

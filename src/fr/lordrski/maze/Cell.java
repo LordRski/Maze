@@ -24,14 +24,16 @@ package fr.lordrski.maze;
 public class Cell extends Coordinates implements Cloneable {
 	
 	private int value;
+	private boolean visited;
 	
 	public Cell(int x, int y, int value) {
 		super(x, y);
 		this.value = value;
+		this.visited = false;
 	}
 
 	public Cell(int x, int y) {
-		super(x, y);
+		this(x, y, 0);
 	}
 	
 	/**
@@ -101,6 +103,24 @@ public class Cell extends Coordinates implements Cloneable {
 	 */
 	public boolean hasWall(Direction d) {
 		return (value & d.exponent()) == 0;
+	}
+	
+	/**
+	 * Test si la case a été visitée par un path finder
+	 * 
+	 * @return vrai si la case a été visitée
+	 */
+	public boolean isVisited() {
+		return this.visited;
+	}
+	
+	/**
+	 * Visite la case
+	 */
+	public void visit() {
+		this.visited = true;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	@Override
