@@ -18,8 +18,8 @@
  */
 package fr.lordrski.maze.algorithm.builder;
 
-import fr.lordrski.maze.Cell;
-import fr.lordrski.maze.Maze;
+import fr.lordrski.maze.entity.Cell;
+import fr.lordrski.maze.entity.Maze;
 
 /**
  * Permet de fabriquer des labyrinthes.
@@ -37,7 +37,7 @@ public abstract class MazeBuilder {
 	 * @return un nouveau labyrinthe
 	 */
 	public Maze build(int width, int height) {
-		return build(width, height, width * (int) Math.random(), height * (int) Math.random());
+		return build(width, height, (int) (Math.random() * width), (int) (Math.random() * height));
 	}
 	
 	/**

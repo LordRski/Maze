@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze;
+package fr.lordrski.maze.entity;
 
 /**
  * Représente une case de coordonnées (x,y), x et y étant des entiers.
@@ -118,9 +118,11 @@ public class Cell extends Coordinates implements Cloneable {
 	 * Visite la case
 	 */
 	public void visit() {
-		this.visited = true;
-		this.setChanged();
-		this.notifyObservers();
+		if (!visited) {
+			this.visited = true;
+			this.setChanged();
+			this.notifyObservers();
+		}
 	}
 	
 	@Override

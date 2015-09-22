@@ -21,9 +21,9 @@ package fr.lordrski.maze.algorithm.finder;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import fr.lordrski.maze.Cell;
-import fr.lordrski.maze.Direction;
-import fr.lordrski.maze.Maze;
+import fr.lordrski.maze.entity.Cell;
+import fr.lordrski.maze.entity.Direction;
+import fr.lordrski.maze.entity.Maze;
 
 /**
  * Algorithme de path finding avec une file.

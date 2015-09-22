@@ -20,9 +20,9 @@ package fr.lordrski.maze.view;
 
 import javax.swing.JFrame;
 
-import fr.lordrski.maze.Maze;
 import fr.lordrski.maze.algorithm.builder.MazeBuilder;
 import fr.lordrski.maze.algorithm.builder.RecursiveMazeBuilder;
+import fr.lordrski.maze.entity.Maze;
 
 /**
  * Fenêtre qui contient la version graphique du labyrinthe.

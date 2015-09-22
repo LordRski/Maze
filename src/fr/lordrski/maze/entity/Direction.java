@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze;
+package fr.lordrski.maze.entity;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -23,9 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-import fr.lordrski.maze.Cell;
-import fr.lordrski.maze.Direction;
-import fr.lordrski.maze.Maze;
+import fr.lordrski.maze.entity.Cell;
+import fr.lordrski.maze.entity.Direction;
+import fr.lordrski.maze.entity.Maze;
 
 /**
  * Algorithme du Recursive Backtracker pour créer un labyrinthe.
