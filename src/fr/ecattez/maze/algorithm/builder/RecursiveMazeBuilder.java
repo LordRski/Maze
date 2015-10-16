@@ -16,16 +16,16 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.algorithm.builder;
+package fr.ecattez.maze.algorithm.builder;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-import fr.lordrski.maze.entity.Cell;
-import fr.lordrski.maze.entity.Direction;
-import fr.lordrski.maze.entity.Maze;
+import fr.ecattez.maze.entity.Cell;
+import fr.ecattez.maze.entity.Direction;
+import fr.ecattez.maze.entity.Maze;
 
 /**
  * Algorithme du Recursive Backtracker pour créer un labyrinthe.

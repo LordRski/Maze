@@ -16,13 +16,13 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.view;
+package fr.ecattez.maze.view;
 
 import javax.swing.JFrame;
 
-import fr.lordrski.maze.algorithm.builder.MazeBuilder;
-import fr.lordrski.maze.algorithm.builder.RecursiveMazeBuilder;
-import fr.lordrski.maze.entity.Maze;
+import fr.ecattez.maze.algorithm.builder.MazeBuilder;
+import fr.ecattez.maze.algorithm.builder.RecursiveMazeBuilder;
+import fr.ecattez.maze.entity.Maze;
 
 /**
  * Fenêtre qui contient la version graphique du labyrinthe.

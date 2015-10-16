@@ -1,4 +1,3 @@
-package fr.lordrski.maze;
 /**
  * This file is part of Maze.
  *
@@ -17,9 +16,14 @@ package fr.lordrski.maze;
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-import org.junit.Test;
+package fr.ecattez.maze;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
+import fr.ecattez.maze.entity.Coordinates;
+import fr.ecattez.maze.entity.Direction;
 
 public class DirectionTestCase extends TestCase {
 	

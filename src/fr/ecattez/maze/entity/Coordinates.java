@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.entity;
+package fr.ecattez.maze.entity;
 
 import java.util.Observable;
 

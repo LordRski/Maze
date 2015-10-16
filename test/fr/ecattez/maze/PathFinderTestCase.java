@@ -16,18 +16,20 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze;
+package fr.ecattez.maze;
 
-import static org.junit.Assert.assertTrue;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import fr.lordrski.maze.algorithm.builder.MazeBuilder;
-import fr.lordrski.maze.algorithm.builder.RecursiveMazeBuilder;
-import fr.lordrski.maze.algorithm.finder.PathFinder;
-import fr.lordrski.maze.algorithm.finder.QueuePathFinder;
+import fr.ecattez.maze.algorithm.builder.MazeBuilder;
+import fr.ecattez.maze.algorithm.builder.RecursiveMazeBuilder;
+import fr.ecattez.maze.algorithm.finder.PathFinder;
+import fr.ecattez.maze.algorithm.finder.QueuePathFinder;
+import fr.ecattez.maze.entity.Cell;
+import fr.ecattez.maze.entity.Maze;
 
-public class PathFinderTestCase {
+public class PathFinderTestCase extends TestCase {
 
 	@Test
 	public void test_a_findPath() {

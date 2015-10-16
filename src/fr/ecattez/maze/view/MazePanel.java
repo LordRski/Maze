@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.view;
+package fr.ecattez.maze.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,12 +35,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.lordrski.maze.algorithm.builder.RecursiveMazeBuilder;
-import fr.lordrski.maze.algorithm.finder.PathFinder;
-import fr.lordrski.maze.algorithm.finder.QueuePathFinder;
-import fr.lordrski.maze.entity.Cell;
-import fr.lordrski.maze.entity.Direction;
-import fr.lordrski.maze.entity.Maze;
+import fr.ecattez.maze.algorithm.builder.RecursiveMazeBuilder;
+import fr.ecattez.maze.algorithm.finder.PathFinder;
+import fr.ecattez.maze.algorithm.finder.QueuePathFinder;
+import fr.ecattez.maze.entity.Cell;
+import fr.ecattez.maze.entity.Direction;
+import fr.ecattez.maze.entity.Maze;
 
 /**
  * Vue graphique du labyrinthe qui utilise la bibliothèque Swing.

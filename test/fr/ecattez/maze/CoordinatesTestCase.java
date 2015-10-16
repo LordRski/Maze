@@ -1,4 +1,3 @@
-package fr.lordrski.maze;
 /**
  * This file is part of Maze.
  *
@@ -17,14 +16,15 @@ package fr.lordrski.maze;
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+package fr.ecattez.maze;
 
 import org.junit.Test;
 
-import fr.lordrski.maze.entity.Coordinates;
+import junit.framework.TestCase;
 
-public class CoordinatesTestCase {
+import fr.ecattez.maze.entity.Coordinates;
+
+public class CoordinatesTestCase extends TestCase {
 
 	@Test
 	public void test_A_coordEquals() {
@@ -34,8 +34,8 @@ public class CoordinatesTestCase {
 		
 		assertEquals(c1, c2);
 		assertEquals(c2, c1);
-		assertNotEquals(c1, c3);
-		assertNotEquals(c2, c3);
+		assertNotSame(c1, c3);
+		assertNotSame(c2, c3);
 	}
 	
 	@Test
@@ -46,7 +46,7 @@ public class CoordinatesTestCase {
 		
 		assertEquals(c1.hashCode(), c2.hashCode());
 		assertEquals(c2.hashCode(), c1.hashCode());
-		assertNotEquals(c1.hashCode(), c3.hashCode());
+		assertNotSame(c1.hashCode(), c3.hashCode());
 	}
 
 }

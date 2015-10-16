@@ -16,10 +16,10 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.algorithm.finder;
+package fr.ecattez.maze.algorithm.finder;
 
-import fr.lordrski.maze.entity.Cell;
-import fr.lordrski.maze.entity.Maze;
+import fr.ecattez.maze.entity.Cell;
+import fr.ecattez.maze.entity.Maze;
 
 /**
  * Permet de trouver un chemin dans un labyrinthe.

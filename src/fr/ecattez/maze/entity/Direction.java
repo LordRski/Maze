@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.entity;
+package fr.ecattez.maze.entity;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,14 +50,14 @@ public enum Direction {
 	}
 	
 	/**
-	 * {@see fr.lordrski.maze.util.Coordinates#getX()}
+	 * {@see fr.ecattez.maze.util.Coordinates#getX()}
 	 */
 	public int getX() {
 		return coord.x;
 	}
 	
 	/**
-	 * {@see fr.lordrski.maze.util.Coordinates#getY()}
+	 * {@see fr.ecattez.maze.util.Coordinates#getY()}
 	 */
 	public int getY() {
 		return coord.y;

@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.lordrski.maze.entity;
+package fr.ecattez.maze.entity;
 
 /**
  * Représente une case de coordonnées (x,y), x et y étant des entiers.
