@@ -18,9 +18,8 @@
  */
 package fr.ecattez.maze.algorithm.builder;
 
+import java.awt.Color;
 import java.util.ArrayDeque;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Queue;
 
 import fr.ecattez.maze.entity.Cell;
@@ -49,6 +48,8 @@ public class RecursiveMazeBuilder extends MazeBuilder {
 		maze.setEntrance(entrance);
 		maze.setExit(exit);
 		
+		entrance.setColor(Color.MAGENTA);
+		exit.setColor(Color.BLUE);
 		return maze;
 	}
 
@@ -72,29 +73,20 @@ public class RecursiveMazeBuilder extends MazeBuilder {
 	@Override
 	public Cell defineExit(Maze maze, Cell entrance) {
 		Queue<Cell> queue = new ArrayDeque<Cell>();
-		Map<Cell, Integer> map = new HashMap<Cell, Integer>();
 		Cell exit = entrance.clone();
-		Cell[] cells = maze.getCells();
 		Cell c;
 		Cell n;
-		int val;
-		
-		for (Cell cell : cells) {
-			map.put(cell, 0);
-		}
 		
 		queue.offer(entrance);
-		
 		while (!queue.isEmpty()) {
 			c = queue.remove();
 			for (Direction d : Direction.values()) {
 				n = c.add(d);
 				if (!maze.hasWall(c, d) && maze.canContain(n)) {
 					n = maze.get(n);
-					if (map.get(n) == 0) {
-						val = map.get(c) + 1;
-						map.put(n, val);
-						if (val > map.get(exit)) {
+					if (n.weight() == 0) {
+						n.weight(c.weight() + 1);
+						if (n.weight() > exit.weight()) {
 							exit = n;
 						}
 						queue.offer(n);

@@ -18,6 +18,9 @@
  */
 package fr.ecattez.maze.entity;
 
+import fr.ecattez.maze.view.Displayer;
+import fr.ecattez.maze.view.SimpleMazeDisplayer;
+
 /**
  * Représentation d'un labyrinthe dans un repère 2D.
  */
@@ -32,7 +35,9 @@ public class Maze implements Cloneable {
 	private Cell entrance;
 	private Cell exit;
 	
-	public Maze(int width, int height) {
+	private Displayer displayer;
+	
+	public Maze(int width, int height, Displayer displayer) {
 		if (width < 0 || width > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Can not build a maze with incorrect width");
 		}
@@ -43,6 +48,7 @@ public class Maze implements Cloneable {
 		this.width = width;
 		this.height = height;
 		this.cell = new Cell[width * height];
+		this.displayer = displayer;
 		
 		int size = width * height;
 		int x = 0;
@@ -56,8 +62,22 @@ public class Maze implements Cloneable {
 		}
 	}
 	
+	public Maze(int width, int height) {
+		this(width, height, new SimpleMazeDisplayer());
+	}
+	
 	public Maze() {
 		this(WIDTH, HEIGHT);
+	}
+	
+	/**
+	 * Saisi le système d'affichage du labyrinthe
+	 * 
+	 * @param	displayer
+	 * 			le système d'affichage du labyrinthe
+	 */
+	public void setDisplayer(Displayer displayer) {
+		this.displayer = displayer;
 	}
 	
 	/**
@@ -199,7 +219,7 @@ public class Maze implements Cloneable {
 	 * @return une case aléatoire du labyrinthe
 	 */
 	public Cell randomAccess() {
-		return cell[cell.length * (int) Math.random()];
+		return cell[(int) (Math.random() * cell.length)];
 	}
 	
 	/**
@@ -256,33 +276,12 @@ public class Maze implements Cloneable {
 	
 	@Override
 	public String toString() {
-		String result = " ";
-		int y = 0;
-		
-		for (int x = 0; x < (width * 2 - 1); x++) {
-			result += "_";
-		}
-		result += "\n|";
-		
-		for (Cell c : cell) {
-			if (c.getY() != y) {
-				y = c.getY();
-				result += "\n|";
-			}
-			result += c.hasWall(Direction.SOUTH) ? "_" : " ";
-			if (c.hasWall(Direction.EAST)) {
-				result += "|";
-			}
-			else {
-				result += ((c.val() | get(c.getX() + 1, c.getY()).val()) & Direction.SOUTH.exponent()) == 0 ? "_" : " ";
-			}
-		}		
-		return result;
+		return displayer.display(this);
 	}
 	
 	@Override
 	public Maze clone() {
-		Maze other = new Maze(width, height);
+		Maze other = new Maze(width, height, displayer);
 		if (cell != null) {
 			other.cell = cell.clone();
 		}

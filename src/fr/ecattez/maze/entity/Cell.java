@@ -18,6 +18,8 @@
  */
 package fr.ecattez.maze.entity;
 
+import java.awt.Color;
+
 /**
  * Représente une case de coordonnées (x,y), x et y étant des entiers.
  */
@@ -25,11 +27,15 @@ public class Cell extends Coordinates implements Cloneable {
 	
 	private int value;
 	private boolean visited;
+	private transient int weight;
+	private Color color;
 	
 	public Cell(int x, int y, int value) {
 		super(x, y);
 		this.value = value;
 		this.visited = false;
+		this.weight = 0;
+		this.color = Color.LIGHT_GRAY;
 	}
 
 	public Cell(int x, int y) {
@@ -88,9 +94,63 @@ public class Cell extends Coordinates implements Cloneable {
 	 * 
 	 * @param	value
 	 * 			la nouvelle valeur de la case
+	 * 
+	 * @return la valeur de la case
 	 */
 	public int val(int value) {
 		return this.value = value;
+	}
+	
+	/**
+	 * Le 'poids' de la case.
+	 * 
+	 * Plus une case est lourde, plus elle est loin de la case de départ.
+	 * La case d'arrivée d'un labyrinthe est donc la case la plus lourde que l'on puisse trouver.
+	 * 
+	 * @return le poids de la case
+	 */
+	public int weight() {
+		return this.weight;
+	}
+	
+	/**
+	 * Saisi le poids de la case.
+	 * 
+	 * @param	weight
+	 * 			le nouveau poids de la case
+	 * 
+	 * @return le poids de la case
+	 */
+	public int weight(int weight) {
+		return this.weight = weight;
+	}
+	
+	/**
+	 * Incrémente le poids de la case
+	 * 
+	 * @return le poids de la case
+	 */
+	public int incWeight() {
+		return this.weight++;
+	}
+	
+	/**
+	 * La couleur de la case
+	 * 
+	 * @return la couleur de la case
+	 */
+	public Color getColor() {
+		return this.color;
+	}
+	
+	/**
+	 * Saisi la couleur de la case
+	 * 
+	 * @param	color
+	 * 			la couleur de la case
+	 */
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
 	/**
@@ -120,6 +180,7 @@ public class Cell extends Coordinates implements Cloneable {
 	public void visit() {
 		if (!visited) {
 			this.visited = true;
+			this.color = Color.RED;
 			this.setChanged();
 			this.notifyObservers();
 		}
