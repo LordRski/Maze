@@ -18,11 +18,12 @@
  */
 package fr.ecattez.maze.algorithm.builder;
 
-import fr.ecattez.maze.entity.Cell;
+import fr.ecattez.maze.entity.Cartesian;
+import fr.ecattez.maze.entity.Coordinates;
 import fr.ecattez.maze.entity.Maze;
 
 /**
- * Permet de fabriquer des labyrinthes.
+ * Constructeur de labyrinthe.
  */
 public abstract class MazeBuilder {
 	
@@ -34,10 +35,10 @@ public abstract class MazeBuilder {
 	 * @param	height
 	 * 			la hauteur du labyrinthe
 	 * 
-	 * @return un nouveau labyrinthe
+	 * @return	un nouveau labyrinthe
 	 */
 	public Maze build(int width, int height) {
-		return build(width, height, (int) (Math.random() * width), (int) (Math.random() * height));
+		return build(width, height, new Cartesian((int) (Math.random() * width), (int) (Math.random() * height)));
 	}
 	
 	/**
@@ -47,27 +48,27 @@ public abstract class MazeBuilder {
 	 * 			la longueur du labyrinthe
 	 * @param	height
 	 * 			la hauteur du labyrinthe
-	 * @param	xstart
-	 * 			la coordonnée x de départ pour la construction du labyrinthe (normalement: x >= 0 & x < width)
-	 * @param	ystart
-	 * 			la coordonnée y de départ pour la construction du labyrinthe (normalement: y >= 0 & y < height)
+	 * @param	start
+	 * 			les coordonnées de départ pour la construction du labyrinthe
 	 * 
-	 * @return un nouveau labyrinthe
+	 * @return	un nouveau labyrinthe
 	 */
-	public Maze build(int width, int height, int xstart, int ystart) {
+	public Maze build(int width, int height, Coordinates start) {
 		if (width < 0 || width > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Can not build a maze with incorrect width=" + width);
 		}
 		if (height < 0 || height > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Can not build a maze with incorrect height=" + height);
 		}
+		double xstart = start.getX();
+		double ystart = start.getY();
 		if (xstart < 0 || xstart >= width) {
 			throw new IndexOutOfBoundsException("Coordinate xstart=" + xstart + " not in maze");
 		}
 		if (ystart < 0 || ystart >= height) {
 			throw new IndexOutOfBoundsException("Coordinate ystart=" + ystart + " not in maze");
 		}
-		return create(width, height, xstart, ystart);
+		return create(width, height, start);
 	}
 	
 	/**
@@ -77,33 +78,21 @@ public abstract class MazeBuilder {
 	 * 			la longueur du labyrinthe
 	 * @param	height
 	 * 			la hauteur du labyrinthe
-	 * @param	xstart
-	 * 			la coordonnée x de départ pour la construction du labyrinthe (normalement: x >= 0 & x < width)
-	 * @param	ystart
-	 * 			la coordonnée y de départ pour la construction du labyrinthe (normalement: y >= 0 & y < height)
+	 * @param	start
+	 * 			les coordonnées de départ pour la construction du labyrinthe
 	 * 
-	 * @return un nouveau labyrinthe
+	 * @return	un nouveau labyrinthe
 	 */
-	protected abstract Maze create(int width, int height, int xstart, int ystart);
+	protected abstract Maze create(int width, int height, Coordinates start);
 	
 	/**
 	 * Ouvre un passage dans un labyrinthe à partir d'une case contenu dans celui-ci
 	 * 
-	 * @param	m
+	 * @param	maze
 	 * 			le labyrinthe dans lequel on crée un passage
-	 * @param	c
-	 * 			la case à partir de laquelle on crée un passage
+	 * @param	coord
+	 * 			les coordonnées à partir des quels on crée un passage
 	 */
-	public abstract void carve(Maze m, Cell c);
-	
-	/**
-	 * Définit la sortie du labyrinthe à partir de la case de départ
-	 * 
-	 * @param	entrance
-	 * 			la case de départ du labyrinthe
-	 * 
-	 * @return la case de sortie du labyrinthe
-	 */
-	public abstract Cell defineExit(Maze maze, Cell entrance);
+	public abstract void carve(Maze maze, Coordinates coord);
 
 }

@@ -19,34 +19,32 @@
 package fr.ecattez.maze.entity;
 
 /**
- * Système de coordonnées (x,y).
+ * Implémentation d'une grille de cellules.
  */
-public interface Coordinates {
+public class ArrayGrid extends Grid {
 	
-	/**
-	 * @return	la coordonnée x
-	 */
-	double getX();
-	
-	/**
-	 * @return	la coordonnée y
-	 */
-	double getY();
-	
-	/**
-	 * @param	c
-	 * 			les coordonnées à ajouter aux coordonnées courante
-	 * 
-	 * @return	les coordonnées qui représentent la somme de deux couples de coordonnées
-	 */
-	Coordinates add(Coordinates c);
-	
-	/**
-	 * @param	c
-	 * 			les coordonnées à vérifier avec les coordonnées courante
-	 * 
-	 * @return	<true> si deux couples de coordonnées sont voisins, <false> sinon
-	 */
-	boolean isCloseTo(Coordinates c);
-	
+	private Cell[][] cells;
+
+	public ArrayGrid(int width, int height) {
+		super(width, height);
+		cells = new Cell[height][width];
+		
+		for (int y=0; y < height; y++) {
+			for (int x=0; x < width; x++) {
+				set(new Cell(), new Cartesian(x, y));
+			}
+		}
+	}
+
+	@Override
+	public void set(Cell c, Coordinates coord) {
+		cells[(int) coord.getY()][(int) coord.getX()] = c;
+		c.addObserver(this);
+	}
+
+	@Override
+	public Cell get(Coordinates coord) {
+		return cells[(int) coord.getY()][(int) coord.getX()];
+	}
+
 }

@@ -19,34 +19,13 @@
 package fr.ecattez.maze.entity;
 
 /**
- * Système de coordonnées (x,y).
+ * Mise en place d'objets "massiques".
  */
-public interface Coordinates {
+public interface Mass {
 	
 	/**
-	 * @return	la coordonnée x
+	 * @return	la masse de l'objet
 	 */
-	double getX();
-	
-	/**
-	 * @return	la coordonnée y
-	 */
-	double getY();
-	
-	/**
-	 * @param	c
-	 * 			les coordonnées à ajouter aux coordonnées courante
-	 * 
-	 * @return	les coordonnées qui représentent la somme de deux couples de coordonnées
-	 */
-	Coordinates add(Coordinates c);
-	
-	/**
-	 * @param	c
-	 * 			les coordonnées à vérifier avec les coordonnées courante
-	 * 
-	 * @return	<true> si deux couples de coordonnées sont voisins, <false> sinon
-	 */
-	boolean isCloseTo(Coordinates c);
-	
+	int getMass();
+
 }

@@ -16,23 +16,16 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.ecattez.maze.view;
-
-import fr.ecattez.maze.entity.Maze;
+package fr.ecattez.maze.entity;
 
 /**
- * Affiche un labyrinthe.
+ * Implémentation d'un objet qui peut être réprésenté par une valeur entière.
  */
-public interface Displayer {
+public interface Scalable {
 	
 	/**
-	 * Affiche un labyrinthe
-	 * 
-	 * @param	maze
-	 * 			le labyrinthe à afficher
-	 * 
-	 * @return une chaîne de caractères représentative du labyrinthe (ou un message en cas d'affichage graphique)
+	 * @return	la valeur de l'objet
 	 */
-	public String display(Maze maze);
+	int getValue();
 
 }

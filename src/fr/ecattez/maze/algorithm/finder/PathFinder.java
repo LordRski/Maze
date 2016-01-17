@@ -18,26 +18,44 @@
  */
 package fr.ecattez.maze.algorithm.finder;
 
-import fr.ecattez.maze.entity.Cell;
-import fr.ecattez.maze.entity.Maze;
+import fr.ecattez.maze.entity.Coordinates;
+import fr.ecattez.maze.entity.Grid;
 
 /**
- * Permet de trouver un chemin dans un labyrinthe.
+ * Permet de trouver un chemin entre deux cellules dans une grille.
  */
-public interface PathFinder {
+public abstract class PathFinder implements Runnable {
 	
-	/**
-	 * Test s'il existe un chemin entre la case de départ et la case d'arrivée
-	 * 
-	 * @param	maze
-	 * 			le labyrinthe dans lequel tester l'algorithme de path finding
-	 * @param	start
-	 * 			la case de départ dans le labyrinthe
-	 * @param	end
-	 * 			la case d'arrivée dans le labyrinthe
-	 * 
-	 * @return vrai s'il existe un chemin entre la case de départ et la case d'arrivée
-	 */
-	public boolean findPath(Maze maze, Cell start, Cell end);
+	protected Grid grid;
+	protected Coordinates start;
+	protected Coordinates end;
+	
+	private boolean success;
+	
+	public PathFinder(Grid grid, Coordinates start, Coordinates end) {
+		this.grid = grid;
+		this.start = start;
+		this.end = end;
+	}
+	
+	public Grid getGrid() {
+		return grid;
+	}
+	
+	public Coordinates getStart() {
+		return start;
+	}
+	
+	public Coordinates getEnd() {
+		return end;
+	}
+	
+	public boolean hasSucceeded() {
+		return success;
+	}
+	
+	public void success() {
+		success = true;
+	}
 
 }

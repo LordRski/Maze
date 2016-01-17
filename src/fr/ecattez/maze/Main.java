@@ -18,10 +18,15 @@
  */
 package fr.ecattez.maze;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 import fr.ecattez.maze.algorithm.builder.MazeBuilder;
 import fr.ecattez.maze.algorithm.builder.RecursiveMazeBuilder;
+import fr.ecattez.maze.algorithm.finder.PathFinder;
+import fr.ecattez.maze.algorithm.finder.QueuePathFinder;
 import fr.ecattez.maze.entity.Maze;
-import fr.ecattez.maze.view.GraphicalMazeDisplayer;
+import fr.ecattez.maze.view.JMaze;
 
 /**
  * Classe de démarrage.
@@ -29,10 +34,23 @@ import fr.ecattez.maze.view.GraphicalMazeDisplayer;
 public class Main {
 	
 	public static void main(String[] args) {
-		MazeBuilder builder = new RecursiveMazeBuilder();
-		Maze maze = builder.build(20, 20);
-		maze.setDisplayer(new GraphicalMazeDisplayer());
-		maze.toString();
+		SwingUtilities.invokeLater(new Runnable()  {
+			public void run() {
+				MazeBuilder builder = new RecursiveMazeBuilder();
+				Maze maze = builder.build(20, 20);
+				
+				JFrame f = new JFrame("Maze");
+				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				f.setContentPane(new JMaze(maze));
+				f.pack();
+				f.setLocationRelativeTo(null);
+				f.setVisible(true);
+				
+				PathFinder finder = new QueuePathFinder(maze, maze.getEntrance(), maze.getExit());
+				Thread thread = new Thread(finder);
+				thread.start();
+			}
+		});		
 	}
 
 }

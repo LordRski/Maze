@@ -22,16 +22,18 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 import fr.ecattez.maze.entity.Cardinal;
+import fr.ecattez.maze.entity.Cartesian;
 import fr.ecattez.maze.entity.Coordinates;
 import fr.ecattez.maze.entity.Grid;
 
-/**
- * Implémentation de l'algorithme de Path Finding avec une fFile.
- */
-public class QueuePathFinder extends PathFinder {
 
-	public QueuePathFinder(Grid grid, Coordinates start, Coordinates end) {
-		super(grid, start, end);
+/**
+ * Algorithme pour trouver le chemin le plus long entre deux cellules d'une grille.
+ */
+public class LongestPathFinder extends PathFinder {
+	
+	public LongestPathFinder(Grid grid, Coordinates start) {
+		super(grid, start, new Cartesian(start.getX(), start.getY()));
 	}
 
 	@Override
@@ -39,33 +41,25 @@ public class QueuePathFinder extends PathFinder {
 		if (!grid.contains(start)) {
 			throw new IllegalArgumentException("Can not find path with illegal start point: " + start);
 		}
-		if (!grid.contains(end)) {
-			throw new IllegalArgumentException("Can not find path with illegal end point: " + end);
-		}
-		Queue<Coordinates> q = new ArrayDeque<>();
+		Queue<Coordinates> queue = new ArrayDeque<>();
 		Coordinates current;
 		Coordinates next;
-		q.offer(start);
-		while (!q.isEmpty()) {
-			current = q.remove();
-			if (current.equals(end)) {
-				success();
-				break;
-			}
+		queue.offer(start);
+		while (!queue.isEmpty()) {
+			current = queue.remove();
 			for (Cardinal direction : Cardinal.values()) {
 				next = current.add(direction);
 				if (grid.contains(next) && !grid.isWalled(current, direction) && grid.isAvailable(next)) {
-					grid.use(next);
-					q.offer(next);
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					grid.setMass(next, grid.getMass(current) + 1);
+					if (grid.getMass(next) > grid.getMass(end)) {
+						end = next;
 					}
+					grid.use(next);
+					queue.offer(next);
 				}
 			}
 		}
+		success();
 		grid.restoreAll();
 	}
 

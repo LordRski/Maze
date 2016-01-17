@@ -18,35 +18,25 @@
  */
 package fr.ecattez.maze;
 
-import org.junit.Test;
-
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
+import fr.ecattez.maze.entity.Cartesian;
 import fr.ecattez.maze.entity.Coordinates;
 
 public class CoordinatesTestCase extends TestCase {
 
 	@Test
 	public void test_A_coordEquals() {
-		Coordinates c1 = new Coordinates(0, 1);
-		Coordinates c2 = new Coordinates(0, 1);
-		Coordinates c3 = new Coordinates(1, 0);
+		Coordinates c1 = new Cartesian(0, 1);
+		Coordinates c2 = new Cartesian(0, 1);
+		Coordinates c3 = new Cartesian(1, 0);
 		
 		assertEquals(c1, c2);
 		assertEquals(c2, c1);
 		assertNotSame(c1, c3);
 		assertNotSame(c2, c3);
-	}
-	
-	@Test
-	public void test_B_coordHashCode() {
-		Coordinates c1 = new Coordinates(0, 1);
-		Coordinates c2 = new Coordinates(0, 1);
-		Coordinates c3 = new Coordinates(1, 0);
-		
-		assertEquals(c1.hashCode(), c2.hashCode());
-		assertEquals(c2.hashCode(), c1.hashCode());
-		assertNotSame(c1.hashCode(), c3.hashCode());
 	}
 
 }
