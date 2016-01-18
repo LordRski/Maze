@@ -30,7 +30,7 @@ import fr.ecattez.maze.entity.Maze;
 public class RecursiveMazeBuilder extends MazeBuilder {
 
 	@Override
-	protected Maze create(int width, int height, Coordinates start) {
+	protected Maze create(int width, int height, final Coordinates start) {
 		Maze maze = new Maze(width, height);
 		carve(maze, start);
 		
@@ -43,7 +43,7 @@ public class RecursiveMazeBuilder extends MazeBuilder {
 	}
 
 	@Override
-	public void carve(Maze maze, Coordinates coord) {
+	public void carve(Maze maze, final Coordinates coord) {
 		Coordinates next;
 		for (Cardinal direction : Cardinal.shuffles()) {
 			next = coord.add(direction);

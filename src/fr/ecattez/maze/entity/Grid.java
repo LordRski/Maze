@@ -240,9 +240,9 @@ public abstract class Grid extends Observable implements Observer {
 	public List<Coordinates> getAvailableAdjacentCells(Coordinates c) {
 		List<Coordinates> coords = new ArrayList<>();
 		Coordinates tmp;
-		for (Coordinates cardinal : Cardinal.values()) {
-			tmp = c.add(cardinal);
-			if (contains(tmp) && isAvailable(tmp)) {
+		for (Cardinal direction : Cardinal.values()) {
+			tmp = c.add(direction);
+			if (contains(tmp) && !isWalled(c, direction) && isAvailable(tmp)) {
 				coords.add(tmp);
 			}
 		}

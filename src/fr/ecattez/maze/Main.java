@@ -25,6 +25,7 @@ import fr.ecattez.maze.algorithm.builder.MazeBuilder;
 import fr.ecattez.maze.algorithm.builder.RecursiveMazeBuilder;
 import fr.ecattez.maze.algorithm.finder.PathFinder;
 import fr.ecattez.maze.algorithm.finder.QueuePathFinder;
+import fr.ecattez.maze.algorithm.finder.RecursivePathFinder;
 import fr.ecattez.maze.entity.Maze;
 import fr.ecattez.maze.view.JMaze;
 
@@ -37,7 +38,7 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable()  {
 			public void run() {
 				MazeBuilder builder = new RecursiveMazeBuilder();
-				Maze maze = builder.build(20, 20);
+				Maze maze = builder.build(30, 30);
 				
 				JFrame f = new JFrame("Maze");
 				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,7 +47,8 @@ public class Main {
 				f.setLocationRelativeTo(null);
 				f.setVisible(true);
 				
-				PathFinder finder = new QueuePathFinder(maze, maze.getEntrance(), maze.getExit());
+//				PathFinder finder = new QueuePathFinder(maze, maze.getEntrance(), maze.getExit());
+				PathFinder finder = new RecursivePathFinder(maze, maze.getEntrance(), maze.getExit());
 				Thread thread = new Thread(finder);
 				thread.start();
 			}

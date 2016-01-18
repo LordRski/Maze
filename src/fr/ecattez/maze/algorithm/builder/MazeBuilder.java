@@ -53,7 +53,7 @@ public abstract class MazeBuilder {
 	 * 
 	 * @return	un nouveau labyrinthe
 	 */
-	public Maze build(int width, int height, Coordinates start) {
+	public Maze build(int width, int height, final Coordinates start) {
 		if (width < 0 || width > Integer.MAX_VALUE) {
 			throw new IllegalArgumentException("Can not build a maze with incorrect width=" + width);
 		}
@@ -83,7 +83,7 @@ public abstract class MazeBuilder {
 	 * 
 	 * @return	un nouveau labyrinthe
 	 */
-	protected abstract Maze create(int width, int height, Coordinates start);
+	protected abstract Maze create(int width, int height, final Coordinates start);
 	
 	/**
 	 * Ouvre un passage dans un labyrinthe à partir d'une case contenu dans celui-ci
@@ -93,6 +93,6 @@ public abstract class MazeBuilder {
 	 * @param	coord
 	 * 			les coordonnées à partir des quels on crée un passage
 	 */
-	public abstract void carve(Maze maze, Coordinates coord);
+	public abstract void carve(Maze maze, final Coordinates coord);
 
 }
